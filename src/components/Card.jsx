@@ -1,59 +1,22 @@
 import { useState } from "react";
 import "../App.css";
 
-const cards = 
-[
-  {
-    id: 0,
-    frontText: "Front Text",
-    backText: "Back Text"
-  },
-  {
-    id: 1,
-    frontText: "Front Text",
-    backText: "Back Text"
-  },
-  {
-    id: 2,
-    frontText: "Front Text",
-    backText: "Back Text"
-  },
-];
-
-const Card = () => {
+const Card = ({card}) => {
   const [flipped, setFlipped] = useState(false);
 
   const handleClick = () => {
     setFlipped(!flipped);
   };
 
-        {
-        // cards.map(card => (
-        //   <div className="card" onClick={handleClick}>
-        //     <div className="front">
-        //       {card.frontText}
-        //     </div>
-        //   </div>
-        // ))
-      }
-
   return (
-    // Conditionally render based on flipped state
-    <>
-    {flipped ? cards.map(card => (
-      <div className="card" onClick={handleClick}>
-        <div className="front">
-          {card.frontText}
-        </div>
+    <div className={`card ${flipped ? "flipped" : ""}`} onClick={handleClick} id={card.id}>
+      <div className="front" style={{ display: flipped ? "none" : "block" }}>
+        {card.frontText}
       </div>
-    )) : (
-      <div className="card flipped" onClick={handleClick}>
-        <div className="back">
-          Back Demo Text
-        </div>
+      <div className="back" style={{ display: flipped ? "block" : "none" }}>
+        {card.backText}
       </div>
-    )}
-    </>
+    </div>
   );
 };
 
