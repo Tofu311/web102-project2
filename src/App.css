@@ -20,52 +20,67 @@
 
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+  transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  animation: logo-spin infinite 20s linear;
   }
 }
 
 .card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2px;
-    box-shadow: 0 0 5px 2px #0000004d;
-    transform-style: preserve-3d;
-    font-weight: 700;
-    height: 250px;
-    cursor: pointer;
-    transition: .15s;
-    transform: perspective(1000px) rotateX(var(--rotate-X, 0))
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  box-shadow: 0 0 5px 2px #0000004d;
+  transform-style: preserve-3d;
+  font-weight: 700;
+  height: 250px;
+  cursor: pointer;
+  transition: .15s;
+  transform: perspective(1000px) rotateX(var(--rotate-X, 0))
 }
 
 .card:hover {
-    box-shadow: 0 0 5px 2px #00000080
+  box-shadow: 0 0 5px 2px #00000080
 }
 
 .card.flipped {
-    --rotate-X: 180deg
+  --rotate-X: 180deg
 }
 
 .card .front,.card .back {
-    position: absolute;
-    padding: 5px;
-    justify-content: center;
-    backface-visibility: hidden
+  position: absolute;
+  padding: 5px;
+  justify-content: center;
+  backface-visibility: hidden;
 }
 
 .card .back {
-    transform: rotateX(180deg)
+  transform: rotateX(180deg)
+}
+
+.card-text {
+  text-align: center;
+}
+
+.card-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.5rem;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.button-container {
+  margin-top: 40px;
 }
