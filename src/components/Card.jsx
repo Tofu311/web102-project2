@@ -1,6 +1,25 @@
 import { useState } from "react";
 import "../App.css";
 
+const cards = 
+[
+  {
+    id: 0,
+    frontText: "Front Text",
+    backText: "Back Text"
+  },
+  {
+    id: 1,
+    frontText: "Front Text",
+    backText: "Back Text"
+  },
+  {
+    id: 2,
+    frontText: "Front Text",
+    backText: "Back Text"
+  },
+];
+
 const Card = () => {
   const [flipped, setFlipped] = useState(false);
 
@@ -8,16 +27,26 @@ const Card = () => {
     setFlipped(!flipped);
   };
 
+        {
+        // cards.map(card => (
+        //   <div className="card" onClick={handleClick}>
+        //     <div className="front">
+        //       {card.frontText}
+        //     </div>
+        //   </div>
+        // ))
+      }
+
   return (
     // Conditionally render based on flipped state
     <>
-    {flipped ? (
+    {flipped ? cards.map(card => (
       <div className="card" onClick={handleClick}>
         <div className="front">
-          Front Demo Text
+          {card.frontText}
         </div>
       </div>
-    ) : (
+    )) : (
       <div className="card flipped" onClick={handleClick}>
         <div className="back">
           Back Demo Text
