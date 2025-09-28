@@ -49,10 +49,20 @@ const cards =
   ];
 
 const App = () => {
+  // Create shuffled card set for random card selection
+  const [shuffledCards] = useState(() => {
+    const copy = [...cards];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  });
+
   const [cardIndex, setCardIndex] = useState(0);
 
   const incrementCardIndex = () => {
-    setCardIndex(i => Math.min(cards.length - 1, i + 1));
+    setCardIndex(i => Math.min(shuffledCards.length - 1, i + 1));
   };
 
   const decrementCardIndex = () => {
@@ -64,14 +74,14 @@ const App = () => {
       <div>
         <h2>Bowling Midterm Practice</h2>
         <h4>Practice questions for PEL2111 Midterm at UCF</h4>
-        <h5>Number of Cards: {cards.length}</h5>
+        <h5>Number of Cards: {shuffledCards.length}</h5>
       </div>
-      <Card card={cards[cardIndex]} />
+      <Card card={shuffledCards[cardIndex]} />
       <div className="button-container">
         <button className="prevCard" type="next" onClick={decrementCardIndex} disabled={cardIndex === 0} aria-disabled={cardIndex === 0}>
           &larr;
         </button>
-        <button className="nextCard" type="next" onClick={incrementCardIndex} disabled={cardIndex === cards.length - 1} aria-disabled={cardIndex === cards.length - 1}>
+        <button className="nextCard" type="next" onClick={incrementCardIndex} disabled={cardIndex === shuffledCards.length - 1} aria-disabled={cardIndex === shuffledCards.length - 1}>
           &rarr;
         </button>
       </div>
