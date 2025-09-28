@@ -18,7 +18,7 @@ const Card = ({card}) => {
   return (
     <div className={`card ${flipped ? "flipped" : ""}`} onClick={handleClick} id={card.id}>
       <div className="front" style={{ display: flipped ? "none" : "block" }}>
-        {card.img && <img src={card.frontImg} className="card-image" />}
+        {card.frontImg && <img src={card.frontImg} className="card-image" />}
         <div className="card-text">{card.frontText}</div>
       </div>
       <div className="back" style={{ display: flipped ? "block" : "none" }}>

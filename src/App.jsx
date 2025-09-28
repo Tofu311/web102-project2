@@ -4,7 +4,10 @@ import Card from "./components/Card";
 
 // Image imports
 import approachImage from "./assets/bowling-approach.png";
-import boards from "./assets/boards.png"
+import boards from "./assets/boards.png";
+import targetArrows from "./assets/targetArrows.jpg";
+import approachZone from "./assets/approachZone.jpg";
+import detailedArrows from "./assets/detailedArrows.png";
 
 const cards =
   [
@@ -28,17 +31,20 @@ const cards =
     {
       id: 3,
       frontText: "How many target arrows are there?",
-      backText: "7"
+      backText: "7",
+      backImg: targetArrows
     },
     {
       id: 4,
       frontText: "How long is the approach?",
-      backText: "15 ft"
+      backText: "15 ft",
+      frontImg: approachZone
     },
     {
       id: 5,
       frontText: "What does each dot/arrow represent on the lane?",
-      backText: "5 boards"
+      backText: "5 boards",
+      backImg: detailedArrows
     }
   ];
 
