@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Card from "./components/Card";
+import AnswerField from "./components/AnswerField";
 
 // Image imports
 import approachImage from "./assets/bowling-approach.png";
@@ -60,6 +61,8 @@ const App = () => {
   });
 
   const [cardIndex, setCardIndex] = useState(0);
+  const [answer, setAnswer] = useState(''); // User-submitted answer
+  const [feedback, setFeedback] = useState(''); // Correct/Incorrect result based on user-submitted answer
 
   const incrementCardIndex = () => {
     setCardIndex(i => Math.min(shuffledCards.length - 1, i + 1));
@@ -69,6 +72,32 @@ const App = () => {
     setCardIndex(i => Math.max(0, i - 1));
   };
 
+  const handleSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+
+    // Get current card and extract the back text to compare against user's answer
+    const currentCard = shuffledCards[cardIndex];
+    if (!currentCard) return;
+
+    // Remove whitespace using regex
+    const expected = String(currentCard.backText).toLowerCase().replace(/\s+/g, '');
+    const guess = String(answer).toLowerCase().replace(/\s+/g, '');
+
+    if (guess === '') return;
+
+    if (guess === expected) {
+      setFeedback("Correct!");
+    } else {
+      setFeedback(`Incorrect! The answer is "${currentCard.backText}"`)
+    }
+  }
+
+  // Reset the input and feedback whenever the card changes
+  useEffect(() => {
+    setAnswer("");
+    setFeedback("");
+  }, [cardIndex]);
+
   return (
     <div className="app">
       <div>
@@ -77,6 +106,13 @@ const App = () => {
         <h5>Number of Cards: {shuffledCards.length}</h5>
       </div>
       <Card card={shuffledCards[cardIndex]} />
+      <AnswerField
+        answer = {answer}
+        setAnswer = {setAnswer}
+        onSubmit = {handleSubmit}
+        onClear={() => { setAnswer(""); setFeedback(""); }}
+        feedback = {feedback}
+      />
       <div className="button-container">
         <button className="prevCard" type="next" onClick={decrementCardIndex} disabled={cardIndex === 0} aria-disabled={cardIndex === 0}>
           &larr;
