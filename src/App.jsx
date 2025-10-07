@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+
+// Component imports
 import Card from "./components/Card";
 import AnswerField from "./components/AnswerField";
+import Streak from "./components/Streak";
 
 // Image imports
 import approachImage from "./assets/bowling-approach.png";
@@ -63,6 +66,8 @@ const App = () => {
   const [cardIndex, setCardIndex] = useState(0);
   const [answer, setAnswer] = useState(''); // User-submitted answer
   const [feedback, setFeedback] = useState(''); // Correct/Incorrect result based on user-submitted answer
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
 
   const incrementCardIndex = () => {
     setCardIndex(i => Math.min(shuffledCards.length - 1, i + 1));
@@ -87,8 +92,14 @@ const App = () => {
 
     if (guess === expected) {
       setFeedback("Correct!");
+      setCurrentStreak(prev => {
+        const next = prev + 1;
+        setLongestStreak(l => Math.max(l, next));
+        return next;
+      });
     } else {
       setFeedback(`Incorrect! The answer is "${currentCard.backText}"`)
+      setCurrentStreak(0);
     }
   }
 
@@ -105,6 +116,7 @@ const App = () => {
         <h4>Practice questions for PEL2111 Midterm at UCF</h4>
         <h5>Number of Cards: {shuffledCards.length}</h5>
       </div>
+      <Streak currentStreak={currentStreak} longestStreak={longestStreak}/>
       <Card card={shuffledCards[cardIndex]} />
       <AnswerField
         answer = {answer}
