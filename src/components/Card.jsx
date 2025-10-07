@@ -1,14 +1,6 @@
-import { useState, useEffect } from "react";
 import "../App.css";
 
-const Card = ({card}) => {
-  const [flipped, setFlipped] = useState(false);
-
-  // Reset flipped state when card changes (so flipping one card doesn't leave the next on flipped)
-  useEffect(() => {
-    setFlipped(false);
-  }, [card?.id]);
-
+const Card = ({ card, flipped = false, setFlipped = () => { } }) => {
   if (!card) return null;
 
   const handleClick = () => {

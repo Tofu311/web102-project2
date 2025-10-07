@@ -49,6 +49,26 @@ const cards =
       frontText: "What does each dot/arrow represent on the lane?",
       backText: "5 boards",
       backImg: detailedArrows
+    },
+    {
+      id: 6,
+      frontText: "What is the term for when a right-handed bowler hits the head pin on the left side?",
+      backText: "Brooklyn"
+    },
+    {
+      id: 7,
+      frontText: "What is the highest score you can obtain?",
+      backText: "300"
+    },
+    {
+      id: 8,
+      frontText: "How many strikes do you need to score a 300?",
+      backText: 12
+    },
+    {
+      id: 9,
+      frontText: "What gets applied to bowlers in order to normalize their score in a league?",
+      backText: "Handicap"
     }
   ];
 
@@ -64,6 +84,7 @@ const App = () => {
   });
 
   const [cardIndex, setCardIndex] = useState(0);
+  const [flipped, setFlipped] = useState(false);
   const [answer, setAnswer] = useState(''); // User-submitted answer
   const [feedback, setFeedback] = useState(''); // Correct/Incorrect result based on user-submitted answer
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -107,6 +128,7 @@ const App = () => {
   useEffect(() => {
     setAnswer("");
     setFeedback("");
+    setFlipped(false);
   }, [cardIndex]);
 
   return (
@@ -117,13 +139,14 @@ const App = () => {
         <h5>Number of Cards: {shuffledCards.length}</h5>
       </div>
       <Streak currentStreak={currentStreak} longestStreak={longestStreak}/>
-      <Card card={shuffledCards[cardIndex]} />
+      <Card card={shuffledCards[cardIndex]} flipped={flipped} setFlipped={setFlipped}/>
       <AnswerField
         answer = {answer}
         setAnswer = {setAnswer}
         onSubmit = {handleSubmit}
         onClear={() => { setAnswer(""); setFeedback(""); }}
         feedback = {feedback}
+        isFront = {!flipped}
       />
       <div className="button-container">
         <button className="prevCard" type="next" onClick={decrementCardIndex} disabled={cardIndex === 0} aria-disabled={cardIndex === 0}>
