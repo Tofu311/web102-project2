@@ -1,6 +1,6 @@
 import '../App.css';
 
-const AnswerField = ({ answer, setAnswer, onSubmit, onClear, feedback, isFront = true }) => {
+const AnswerField = ({ answer, setAnswer, onSubmit, onClear, feedback, isFront = true, guessSubmitted }) => {
   // const [answer, setAnswer] = useState('')
 
   const handleSubmit = (e) => {
@@ -21,7 +21,7 @@ const AnswerField = ({ answer, setAnswer, onSubmit, onClear, feedback, isFront =
         />
       </form>
       <button onClick={onClear} style={{marginRight: 4}} disabled={!isFront}> Clear Guess</button>
-      <button onClick={handleSubmit} style={{marginLeft: 4}} disabled={!isFront}>Submit Guess</button>
+      <button onClick={handleSubmit} style={{marginLeft: 4}} disabled={!isFront || guessSubmitted}>Submit Guess</button>
       {feedback && <div style={{marginTop: 8}}>{feedback}</div>}
       {!isFront && <div style={{marginTop:8}}>Flip the card to answer</div>}
     </div>

@@ -89,6 +89,7 @@ const App = () => {
   const [feedback, setFeedback] = useState(''); // Correct/Incorrect result based on user-submitted answer
   const [currentStreak, setCurrentStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
+  const [guessSubmitted, setGuessSubmitted] = useState(false);
 
   const incrementCardIndex = () => {
     setCardIndex(i => Math.min(shuffledCards.length - 1, i + 1));
@@ -122,6 +123,8 @@ const App = () => {
       setFeedback(`Incorrect! The answer is "${currentCard.backText}"`)
       setCurrentStreak(0);
     }
+
+    setGuessSubmitted(true);
   }
 
   // Reset the input and feedback whenever the card changes
@@ -129,6 +132,7 @@ const App = () => {
     setAnswer("");
     setFeedback("");
     setFlipped(false);
+    setGuessSubmitted(false);
   }, [cardIndex]);
 
   return (
@@ -147,6 +151,7 @@ const App = () => {
         onClear={() => { setAnswer(""); setFeedback(""); }}
         feedback = {feedback}
         isFront = {!flipped}
+        guessSubmitted = {guessSubmitted}
       />
       <div className="button-container">
         <button className="prevCard" type="next" onClick={decrementCardIndex} disabled={cardIndex === 0} aria-disabled={cardIndex === 0}>
